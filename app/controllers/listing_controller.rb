@@ -1,5 +1,6 @@
 class ListingController < ApplicationController
 
+
   def new
     @listing = Listing.new
   end
@@ -9,5 +10,8 @@ class ListingController < ApplicationController
     @listing = Listing.create(listing_params)
     @listing.user = @user
     @listing.save
+
+  def show
+    @listing = Listing.find(params[:id])
   end
 end
