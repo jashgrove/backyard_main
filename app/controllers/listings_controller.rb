@@ -19,10 +19,9 @@ class ListingsController < ApplicationController
     redirect_to  listing_path
   end
 
-private
+  private
 
   def listing_params
-    params.require(:listing).permit(:name :description :address :price_per_hour)
+    params.require(:listing).permit(:name, :description, :address, :price_per_hour)
   end
-
 end
