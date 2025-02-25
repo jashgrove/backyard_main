@@ -12,4 +12,5 @@ class BookingsController < ApplicationController
     @booking.listing = @listing
     @booking.save
   end
+
 end
