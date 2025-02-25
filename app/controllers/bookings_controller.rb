@@ -1,8 +1,10 @@
 class BookingsController < ApplicationController
-  before_action :set_listing
+  before_action :set_listing, except: [:index]
+  before_action :current_user
 
-  def listing_bookings
-    @bookings = @listing.bookings
+  def index
+    @renter_bookings = current_user.bookings.includes(:listings)
+    @owner_listings = current_user.listings.includes(:bookings)
   end
 
   def new
@@ -11,9 +13,8 @@ class BookingsController < ApplicationController
 
   def create
     @bookings = @listing.bookings
-    user = User.create!(email: "test@example.com", password: "password123")
     @booking = @listing.bookings.new(booking_params)
-    @booking.user = user
+    @booking.user = @user
     if @booking.save
       redirect_to listing_path(@listing)
     else
@@ -31,4 +32,7 @@ private
     params.require(:booking).permit(:start_date, :end_date)
   end
 
+  def current_user
+    @user = User.first
+  end
 end

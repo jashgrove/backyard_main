@@ -10,4 +10,6 @@ Rails.application.routes.draw do
     resources :bookings, only: [:index, :destroy]
   end
 
+  get '/my_bookings', to: 'bookings#index', as: 'my_bookings'
+
 end
