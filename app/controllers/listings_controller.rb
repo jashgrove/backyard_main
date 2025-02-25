@@ -2,6 +2,7 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.find(params[:id])
+    @listing_reviews = @listing.listing_reviews
   end
 
   def new

@@ -22,11 +22,19 @@ Listing.destroy_all
     address: Faker::Address.full_address,
   )
 
-  Listing.create(
+  listing = Listing.create(
     name: Faker::Company.name,
     description: Faker::Company.catch_phrase,
     address: Faker::Address.full_address,
     price_per_hour: Faker::Number.decimal(l_digits: 2),
     user: user,
   )
+  3.times do
+    ListingReview.create(
+      content: Faker::Lorem.paragraph,
+      rating: Faker::Number.between(from: 1, to: 5),
+      user: user,
+      listing: listing,
+    )
+  end
 end
