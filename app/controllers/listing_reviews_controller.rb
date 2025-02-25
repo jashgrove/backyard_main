@@ -4,7 +4,7 @@ class ListingReviewsController < ApplicationController
     @listing = Listing.find(params[:listing_id])
     @review = ListingReview.new(listing_review_params)
     @review.listing = @listing
-    @review.user = current_user
+    @review.user = User.last # ToDo: change to current_user from devise
 
     respond_to do |format|
       if @review.save
