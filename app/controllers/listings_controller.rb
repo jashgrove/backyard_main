@@ -24,5 +24,4 @@ class ListingsController < ApplicationController
   def listing_params
     params.require(:listing).permit(:name, :description, :address, :price_per_hour)
   end
-
 end
