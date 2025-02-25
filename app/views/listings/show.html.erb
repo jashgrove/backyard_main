@@ -7,13 +7,12 @@
     </div>
   </div>
 
-
-  <div class="card my-3 p-4">
+  <div class="card my-5 p-4" data-controller="add-review">
     <h2>Reviews</h2>
     <hr>
     <% if @listing_reviews.any? %>
       <div class="card my-3">
-        <div class="card-body">
+        <div class="card-body" data-review-target="reviewsList">
           <% @listing_reviews.each do |review| %>
             <p class="card-text">Posted by: <%= review.user.first_name + review.user.last_name %></p>
             <p class="card-text">Rating: <%= review.rating %></p>
@@ -23,8 +22,34 @@
         </div>
       </div>
       <% end %>
-      <%# ToDo: change the new review path, new_listing_review_path(@listing), %>
-    <%= link_to "+ Add a new review", listings_path, class: 'text-decoration-none mt-5' %>
+      <button type="button" class="btn btn-primary" data-action="click->add-review#toggleForm">
+        Add a new review
+      </button>
   </div>
-  <hr>
-  <%= link_to "Back to list", listings_path, class: 'text-decoration-none mt-5' %>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">
+  Book listing
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookingModalLabel">Book "<%= @listing.name %>"</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <!-- ToDo: render new booking form -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Submit request</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+<%= link_to "Back to list", listings_path, class: 'text-decoration-none mt-5' %>
