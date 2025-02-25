@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :listings do
     resources :bookings, only: [:new, :create, :index]
+    resources :listing_reviews, only: :create
   end
 
   resources :users do

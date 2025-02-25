@@ -1,0 +1,11 @@
+<%= simple_form_for([listing, review], url: listing_listing_reviews_path(listing, review), html: { class: 'form-horizontal' }) do |f| %>
+  <div class="form-group">
+    <%= f.input :rating, input_html: { class: 'form-control' } %>
+  </div>
+  <div class="form-group">
+    <%= f.input :content, input_html: { class: 'form-control' } %>
+  </div>
+  <div class="form-group my-3">
+    <%= f.submit 'Submit Review', class: 'btn btn-primary' %>
+  </div>
+<% end %>
