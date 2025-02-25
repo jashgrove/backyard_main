@@ -1,3 +1,4 @@
+<<<<<<< HEAD:app/controllers/listing_controller.rb
 class ListingController < ApplicationController
   def index
     @listings = Listing.all
@@ -13,9 +14,14 @@ class ListingController < ApplicationController
     @listing = Listing.create(listing_params)
     @listing.user = @user
     @listing.save
+=======
+class ListingsController < ApplicationController
+>>>>>>> 3ceebe987836f9df1991ae23db2c02642c7bd689:app/controllers/listings_controller.rb
 
   def show
     @listing = Listing.find(params[:id])
+  end
+
   def new
     @listing = Listing.new
   end
