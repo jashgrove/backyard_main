@@ -1,6 +1,7 @@
 class ListingsController < ApplicationController
   def index
     @listings = Listing.all
+    @listing = Listing.new
   end
 
   def new
@@ -12,11 +13,10 @@ class ListingsController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:id])
+    @user = current_user
     @listing = Listing.create(listing_params)
     @listing.user = @user
     @listing.save
-    redirect_to  listing_path
   end
 
   private
