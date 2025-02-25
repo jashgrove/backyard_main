@@ -1,5 +1,5 @@
-<%= simple_form_for [@user, @booking] do |f| %>
+<%= simple_form_for [@listing, @booking] do |f| %>
   <%= f.input :start_date, required: false %>
   <%= f.input :end_date, required: true %>
-  <%= f.button :submit %>
+  <%= f.button :submit, "Book Now" %>
 <% end %>
