@@ -3,7 +3,7 @@ class ListingsController < ApplicationController
   def new
     @listing = Listing.new
   end
-
+  
   def show
     @listing = Listing.find(params[:id])
   end
