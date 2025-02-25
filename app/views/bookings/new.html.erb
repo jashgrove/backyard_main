@@ -1,5 +1,18 @@
-<%= simple_form_for [@listing, @booking] do |f| %>
-  <%= f.input :start_date, required: false %>
-  <%= f.input :end_date, required: true %>
-  <%= f.button :submit, "Book Now" %>
-<% end %>
+
+
+<div data-controller="toggle">
+  <button data-action="click->toggle#fire" class="btn btn-outline-primary">
+    Book now!
+  </button>
+  <div data-toggle-target="togglableElement" class="d-none">
+    <%= simple_form_for [@listing, @booking] do |f| %>
+      <%= f.input :start_date,
+            as: :string,
+            input_html: { data: { controller: "datepicker" } } %>
+      <%= f.input :end_date,
+            as: :string,
+            input_html: { data: { controller: "datepicker" } } %>
+      <%= f.button :submit, "Book Now" %>
+    <% end %>
+  </div>
+</div>

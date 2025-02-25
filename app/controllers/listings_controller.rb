@@ -1,6 +1,8 @@
 class ListingsController < ApplicationController
   def index
     @listings = Listing.all
+    @listing = Listing.new
+    @current_user = current_user
   end
 
   def new
@@ -12,11 +14,18 @@ class ListingsController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:id])
+    @user = current_user
     @listing = Listing.create(listing_params)
     @listing.user = @user
-    @listing.save
-    redirect_to listing_path(@listing)
+    respond_to do |format|
+      if @listing.save
+        format.html { redirect_to listing_path(@listing) }
+        format.json
+      else
+        format.html { render "listings/new", status: :unprocessable_entity }
+        format.json
+      end
+    end
   end
 
   private
