@@ -1,0 +1,37 @@
+<h1>Here are your bookings</h1>
+
+<% if current_user.listings.any? %>
+  <% current_user.listings.each do |listing| %>
+    <h2>
+      <%= listing.name %>
+    </h2>
+    <ul>
+      <% listing.bookings.each do |booking| %>
+      <li>
+        <%= booking.user.email %>
+      </li>
+      <li>
+        <%= booking.start_date %>
+      </li>
+      <li>
+        <%= booking.end_date %>
+      </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
+<% if current_user.bookings.any? %>
+  <% current_user.bookings.each do |booking| %>
+    <h2>
+      <%= booking.listing.name %>
+    </h2>
+    <ul>
+      <li>
+        <%= booking.start_date %>
+      </li>
+          <li>
+        <%= booking.end_date %>
+      </li>
+    </ul>
+  <% end %>
+<% end %>
