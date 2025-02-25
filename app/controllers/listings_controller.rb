@@ -13,10 +13,10 @@ class ListingsController < ApplicationController
 
   def create
     @user = User.find(params[:id])
-    @listing = Listing.create(listing_params)
+    @listing = Listing.new(listing_params)
     @listing.user = @user
     @listing.save
-    redirect_to  listing_path
+    redirect_to listing_path(@listing)
   end
 
   private
