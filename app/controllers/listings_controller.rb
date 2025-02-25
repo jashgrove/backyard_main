@@ -12,6 +12,7 @@ class ListingsController < ApplicationController
   def show
     @listing = Listing.find(params[:id])
     @listing_reviews = @listing.listing_reviews
+    @review = ListingReview.new
   end
 
   def create
@@ -25,7 +26,7 @@ class ListingsController < ApplicationController
 private
 
   def listing_params
-    params.require(:listing).permit(:name :description :address :price_per_hour)
+    params.require(:listing).permit(:name, :description, :address, :price_per_hour)
   end
 
 end
