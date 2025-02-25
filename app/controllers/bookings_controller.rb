@@ -33,6 +33,6 @@ private
   end
 
   def current_user
-    @user = User.first
+    @user = current_user
   end
 end
