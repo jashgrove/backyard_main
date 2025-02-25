@@ -14,7 +14,7 @@
       <div class="card my-3">
         <div class="card-body" data-add-review-target="reviewsList">
           <% @listing_reviews.each do |review| %>
-            <p class="card-text">Posted by: <%= review.user.first_name + review.user.last_name %></p>
+            <p class="card-text">Posted by: <%= "#{review.user.first_name} #{review.user.last_name}" %></p>
             <p class="card-text">Rating: <%= review.rating %></p>
             <p class="card-text">Comment: <%= review.content %></p>
             <hr>
