@@ -1,0 +1,9 @@
+<h1>Listings</h1>
+  <ul>
+    <% @listings.each do |listing| %>
+      <li>
+        <strong><%= listing.name %></strong> - $<%= listing.price_per_hour %><br>
+        <p><%= listing.description %></p>
+      </li>
+    <% end %>
+  </ul>
