@@ -1,13 +1,20 @@
 <h1>Listings</h1>
-  <ul>
+
+<div class="container" data-controller="insert-in-list">
+
+  <ul data-insert-in-list-target="items">
     <% @listings.each do |listing| %>
-      <li>
-        <strong><%= listing.name %></strong> - $<%= listing.price_per_hour %><br>
-        <p><%= listing.description %></p>
-      </li>
+      <%= render "listings/listing", listing: listing %>
     <% end %>
   </ul>
 
-<div data-controller="toggle" class="mt-5">
-  <button class="btn btn-outline-primary">Add a New Listing</button>
-  <%= render "form", listing: @listing%>
+  <div data-controller="toggle" class="mt-5">
+    <button data-action="click->toggle#fire" class="btn btn-outline-primary">
+      Create New Listing
+    </button>
+
+    <div data-toggle-target="togglableElement" class="d-none">
+      <%= render "form", listing: @listing %>
+    </div>
+  </div>
+</div>
