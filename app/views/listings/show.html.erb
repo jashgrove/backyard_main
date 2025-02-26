@@ -12,7 +12,7 @@
     <hr>
     <% if @listing_reviews.any? %>
       <div class="card my-3">
-        <div class="card-body" data-add-review-target="reviewsList">
+        <div class="card-body">
           <% @listing_reviews.each do |review| %>
             <p class="card-text">Posted by: <%= "#{review.user.first_name} #{review.user.last_name}" %></p>
             <p class="card-text">Rating: <%= review.rating %></p>
@@ -22,7 +22,7 @@
         </div>
       </div>
       <% end %>
-      <button type="button" class="btn btn-primary" data-action="click->add-review#showForm">
+      <button type="button" class="btn btn-outline-primary" data-action="click->add-review#showForm">
         Add a new review
       </button>
 
@@ -32,7 +32,7 @@
   </div>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">
+<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">
   Book listing
 </button>
 
@@ -45,11 +45,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <!-- ToDo: render new booking form -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Submit request</button>
+        <%= render 'shared/booking_form', listing: @listing, booking: @booking %>
       </div>
     </div>
   </div>
