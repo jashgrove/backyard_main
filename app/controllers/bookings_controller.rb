@@ -22,7 +22,10 @@ class BookingsController < ApplicationController
     end
   end
 
-private
+  def pending
+  end
+
+  private
 
   def set_listing
     @listing = Listing.find(params[:listing_id])

@@ -12,4 +12,6 @@ Rails.application.routes.draw do
 
   get '/my_bookings', to: 'bookings#index', as: 'my_bookings'
 
+  get '/my_bookings/pending', to: 'bookings#pending', as: "my_bookings/pending"
+
 end
