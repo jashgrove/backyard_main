@@ -3,7 +3,7 @@
 <div class="container" data-controller="insert-in-list">
   <div class="row g-4" data-insert-in-list-target="items">
     <% @listings.each do |listing| %>
-      <div class="col-sm-3">
+      <div class="col-sm-4">
         <%= render "listings/listing", listing: listing %>
       </div>
     <% end %>
