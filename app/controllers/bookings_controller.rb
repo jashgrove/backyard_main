@@ -33,16 +33,12 @@ class BookingsController < ApplicationController
 
   def approve
     @bookings = Booking.find(params[:id])
-    if (@bookings.status = 'approved')
-      flash[:alert] = "Booking succesfully denied"
-    end
+    flash[:notice] = "Booking successfully approved" if @bookings.update(status: 'approved')
   end
 
   def deny
     @bookings = Booking.find(params[:id])
-    if (@bookings.status = 'denied')
-      flash[:alert] = "Booking succesfully denied"
-    end
+    flash[:notice] = "Booking successfully denied" if @bookings.update(status: 'denied')
   end
 
   private
