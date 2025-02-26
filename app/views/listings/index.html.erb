@@ -1,18 +1,17 @@
 <h1>Listings</h1>
 
-
 <div data-controller="insert-in-list">
-
-  <ul data-insert-in-list-target="items" class="list-group border border-white border-0">
+  <div data-insert-in-list-target="items" class="row">
     <% @listings.each do |listing| %>
-      <div class="col-sm-3">
-      <%= link_to listing_path(listing), class: "text-decoration-none" do %>
-        <%= render "listings/listing", listing: listing %>
-      <% end %>
-
+      <div class="col-sm-3 mb-4">
+        <%= link_to listing_path(listing), class: "text-decoration-none" do %>
+          <%= render "listings/listing", listing: listing %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>
+
 
 
 
@@ -25,4 +24,10 @@
       <%= render "form", listing: @listing %>
     </div>
   </div>
+</div>
+
+<div class="mt-5" style="width: 100%; height: 600px;"
+  data-controller="map"
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>

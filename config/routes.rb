@@ -19,4 +19,7 @@ Rails.application.routes.draw do
 
   get '/my_bookings/:id/deny', to: 'bookings#deny', as: 'my_bookings_deny'
 
+  get '/my_listings', to: 'listings#my_index', as: 'my_listings'
+
+
 end

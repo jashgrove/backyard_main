@@ -7,4 +7,7 @@ class Listing < ApplicationRecord
   validates :user, presence: true
   has_many :bookings
   has_many :listing_reviews
+
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
 end
