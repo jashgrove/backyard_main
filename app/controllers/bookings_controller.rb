@@ -15,18 +15,15 @@ class BookingsController < ApplicationController
     @bookings = @listing.bookings
     @booking = @listing.bookings.new(booking_params)
     @booking.user = current_user
-    if @booking.save
-      redirect_to listing_path(@listing)
-    else
-      flash[:alert] = "Booking could not be saved. Please check your input."
-#     respond_to do |format|
-#       if @booking.save
-#         format.html { redirect_to listing_path(@listing) }
-#         format.json # Follows the classic Rails flow and look for a create.json
-#       else
-#         format.html { render listing_path(@listing), status: :unprocessable_entity }
-#         format.json # Follows the classic Rails flow and look for a create.json
-#       end
+    respond_to do |format|
+      if @booking.save
+        format.html { redirect_to listing_path(@listing) }
+        format.json
+        flash[:alert] = "Booking succesfully created"
+      else
+        format.html { render listing_path(@listing), status: :unprocessable_entity }
+        format.json
+      end
     end
   end
 
