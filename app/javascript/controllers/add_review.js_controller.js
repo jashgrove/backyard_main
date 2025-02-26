@@ -5,16 +5,14 @@ export default class extends Controller {
   connect() {
   }
 
-  static targets = ["reviewsList", "addReviewForm", "form"]
+  static targets = ["addReviewForm", "form"]
 
   showForm() {
-    console.log("tada", this.addReviewFormTarget);
     this.addReviewFormTarget.classList.remove("d-none");
   }
 
   addReview(event) {
     event.preventDefault()
-    console.log("form", this.formTarget);
 
     fetch(this.formTarget.action, {
       method: "POST",
@@ -23,8 +21,6 @@ export default class extends Controller {
     })
       .then(response => response.json())
       .then((data) => {
-        console.log("data", data);
-
         if (data.inserted_item) {
           this.itemsTarget.insertAdjacentHTML("beforeend", data.inserted_item)
         }
