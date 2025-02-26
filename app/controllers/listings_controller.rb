@@ -1,11 +1,18 @@
 class ListingsController < ApplicationController
   # skip_before_action :authenticate_user!, only: :show
 
-
   def index
     @listings = Listing.all
     @listing = Listing.new
     @current_user = current_user
+
+     # The `geocoded` scope filters only listings with coordinates
+    @markers = @listings.geocoded.map do |flat|
+      {
+        lat: flat.latitude,
+        lng: flat.longitude
+      }
+    end
   end
 
   def new
