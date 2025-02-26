@@ -12,6 +12,15 @@ require "faker"
 User.destroy_all
 Listing.destroy_all
 
+#  for login
+user = User.create(
+    email: "user@gmail.com",
+    password: "password",
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    address: Faker::Address.full_address,
+  )
+
 5.times do
 
   user = User.create(
