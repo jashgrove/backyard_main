@@ -7,6 +7,13 @@
     </div>
   </div>
 
+<%= link_to "Delete",
+  listing_path(@listing),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+%>
+
+<%= link_to "Edit Listing", edit_listing_path(@listing) %>
+
   <div class="card my-5 p-4" data-controller="add-review">
     <h2>Reviews</h2>
     <hr>
@@ -66,3 +73,4 @@
 
 <hr>
 <%= link_to "Back to list", listings_path, class: 'text-decoration-none mt-5' %>
+
