@@ -7,9 +7,6 @@
         <strong><%= listing.name %></strong>
         <p><%= listing.description %></p>
         <p><%= link_to 'View', listing_path(listing) %> |
-          <%= link_to 'Edit', edit_listing_path(listing) %> |
-          <%= link_to 'Delete', listing_path(listing), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-      </li>
     <% end %>
   </ul>
 <% else %>

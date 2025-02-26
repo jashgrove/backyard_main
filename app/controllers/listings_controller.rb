@@ -61,6 +61,7 @@ class ListingsController < ApplicationController
     @listing.update(listing_params)
     redirect_to listing_path(@listing)
   end
+
   private
 
   def listing_params
