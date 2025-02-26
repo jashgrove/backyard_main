@@ -4,7 +4,7 @@
   <ul>
     <% @listings.each do |listing| %>
       <li>
-        <strong><%= listing.title %></strong>
+        <strong><%= listing.name %></strong>
         <p><%= listing.description %></p>
         <p><%= link_to 'View', listing_path(listing) %> |
           <%= link_to 'Edit', edit_listing_path(listing) %> |
