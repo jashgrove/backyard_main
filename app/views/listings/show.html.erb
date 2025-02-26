@@ -29,9 +29,16 @@
         </div>
       </div>
       <% end %>
-      <button type="button" class="btn btn-outline-primary" data-action="click->add-review#showForm">
+
+      <% if user_signed_in? %>
+        <button type="button" class="btn btn-outline-primary" data-action="click->add-review#showForm">
         Add a new review
       </button>
+      <% else %>
+        <button type="button" class="btn btn-outline-primary disabled" data-action="click->add-review#showForm">
+          Add a new review
+        </button>
+      <% end %>
 
     <div class="review-form d-none" data-add-review-target="addReviewForm" >
       <%= render 'review_form', review: @review, listing: @listing, data: { add_review_target: "form" }  %>
@@ -39,9 +46,15 @@
   </div>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">
-  Book listing
-</button>
+<% if user_signed_in? %>
+  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">
+    Book listing
+  </button>
+<% else %>
+ <button type="button" class="btn btn-outline-primary disabled" data-bs-toggle="modal" data-bs-target="#bookingModal">
+    Book listing
+  </button>
+<% end %>
 
 <!-- Modal -->
 <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
