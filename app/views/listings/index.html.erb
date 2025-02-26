@@ -1,14 +1,18 @@
 <h1>Listings</h1>
 
-<div class="container" data-controller="insert-in-list">
-  <div class="row g-4" data-insert-in-list-target="items">
+
+<div data-controller="insert-in-list">
+  <div data-insert-in-list-target="items" class="row">
     <% @listings.each do |listing| %>
-      <div class="col-sm-4">
-        <%= render "listings/listing", listing: listing %>
+      <div class="col-sm-3 mb-4">
+        <%= link_to listing_path(listing), class: "text-decoration-none" do %>
+          <%= render "listings/listing", listing: listing %>
+        <% end %>
       </div>
     <% end %>
   </div>
 </div>
+
 
 
 
