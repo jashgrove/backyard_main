@@ -1,6 +1,6 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
+    <%= link_to "root_path", class: "navbar-brand" do %>
       <h1 class="navbar-title">BackYard</h1>
     <% end %>
 
@@ -12,18 +12,19 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
+            <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "My Bookings", "#", class: "nav-link" %>
+            <%= link_to "My Bookings", "my_bookings", class: "nav-link" %>
           </li>
-          <li class="nav-item dropdown">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "About us", "#", class: "dropdown-item" %>
-              <%= link_to "Listings in your area", "#", class: "dropdown-item" %>
-              <%= link_to "Contact us", "#", class: "dropdown-item", data: {turbo_method: :delete} %>
-              <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
+          <li class="nav-item">
+            <%= link_to "Log out", destroy_user_session_path, class: "nav-link", data: {turbo_method: :delete} %>
+          </li>
+           <li class="nav-item dropdown">
+            <%= image_tag "data:image/png;base64,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", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <div class="nav-item">
+              <%= link_to "My Profile", "#", class: "nav-link", data: {turbo_method: :delete} %>
+              <%= link_to "Log out", destroy_user_session_path, class: "nav-link", data: {turbo_method: :delete} %>
             </div>
           </li>
         <% else %>
