@@ -1,0 +1,9 @@
+   <%= simple_form_for [listing, booking], url: listing_bookings_path(listing, booking) do |f| %>
+      <%= f.input :start_date,
+            as: :string,
+            input_html: { data: { controller: "datepicker" } } %>
+      <%= f.input :end_date,
+            as: :string,
+            input_html: { data: { controller: "datepicker" } } %>
+      <%= f.button :submit, "Book Now", class: 'btn btn-outline-primary' %>
+    <% end %>
