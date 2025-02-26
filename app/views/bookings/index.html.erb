@@ -16,6 +16,7 @@
       <li>
         <%= booking.end_date %>
       </li>
+      <% if listing.bookings.where(status: 'pending').any? %>
       <%= link_to "Approve", my_bookings_approve_path(booking),
             method: :patch,
             data: { confirm: "Are you sure you want to approve this booking?" },
@@ -24,6 +25,7 @@
             method: :patch,
             data: { confirm: "Are you sure you want to deny this booking?" },
             class: "btn btn-danger" %>
+            <% end %>
       <% end %>
     </ul>
   <% end %>
