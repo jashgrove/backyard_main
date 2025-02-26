@@ -6,3 +6,10 @@
         <p class="card-text me-3">Address: <%= @listing.price_per_hour %></p>
     </div>
   </div>
+
+<%= link_to "Delete",
+  listing_path(@listing),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+%>
+
+<%= link_to "Edit Listing", edit_listing_path(@listing) %>
