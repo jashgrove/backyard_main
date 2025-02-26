@@ -6,3 +6,71 @@
         <p class="card-text me-3">Address: <%= @listing.price_per_hour %></p>
     </div>
   </div>
+
+<%= link_to "Delete",
+  listing_path(@listing),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+%>
+
+<%= link_to "Edit Listing", edit_listing_path(@listing) %>
+
+  <div class="card my-5 p-4" data-controller="add-review">
+    <h2>Reviews</h2>
+    <hr>
+    <% if @listing_reviews.any? %>
+      <div class="card my-3">
+        <div class="card-body">
+          <% @listing_reviews.each do |review| %>
+            <p class="card-text">Posted by: <%= "#{review.user.first_name} #{review.user.last_name}" %></p>
+            <p class="card-text">Rating: <%= review.rating %></p>
+            <p class="card-text">Comment: <%= review.content %></p>
+            <hr>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+
+      <% if user_signed_in? %>
+        <button type="button" class="btn btn-outline-primary" data-action="click->add-review#showForm">
+        Add a new review
+      </button>
+      <% else %>
+        <button type="button" class="btn btn-outline-primary disabled" data-action="click->add-review#showForm">
+          Add a new review
+        </button>
+      <% end %>
+
+    <div class="review-form d-none" data-add-review-target="addReviewForm" >
+      <%= render 'review_form', review: @review, listing: @listing, data: { add_review_target: "form" }  %>
+    </div>
+  </div>
+
+<!-- Button trigger modal -->
+<% if user_signed_in? %>
+  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">
+    Book listing
+  </button>
+<% else %>
+ <button type="button" class="btn btn-outline-primary disabled" data-bs-toggle="modal" data-bs-target="#bookingModal">
+    Book listing
+  </button>
+<% end %>
+
+<!-- Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookingModalLabel">Book "<%= @listing.name %>"</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render 'shared/booking_form', listing: @listing, booking: @booking %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+<%= link_to "Back to list", listings_path, class: 'text-decoration-none mt-5' %>
+
