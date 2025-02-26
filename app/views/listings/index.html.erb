@@ -1,6 +1,5 @@
 <h1>Listings</h1>
 
-
 <div data-controller="insert-in-list">
   <div data-insert-in-list-target="items" class="row">
     <% @listings.each do |listing| %>
@@ -25,4 +24,10 @@
       <%= render "form", listing: @listing %>
     </div>
   </div>
+</div>
+
+<div class="mt-5" style="width: 100%; height: 600px;"
+  data-controller="map"
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
