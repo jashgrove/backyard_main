@@ -1,7 +1,6 @@
 class ListingsController < ApplicationController
   # skip_before_action :authenticate_user!, only: :show
 
-
   def index
     @listings = Listing.all
     @listing = Listing.new
@@ -14,6 +13,7 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.find(params[:id])
+    @bookings = @listing.bookings.where("start_date > ?", DateTime.now).where(approved: true)
     @listing_reviews = @listing.listing_reviews
     @review = ListingReview.new
     @booking = Booking.new
