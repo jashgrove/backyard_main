@@ -7,9 +7,9 @@
     </div>
   </div>
 
-<%= link_to "Delete",
-  listing_path(@listing),
-  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-%>
 
-<%= link_to "Edit Listing", edit_listing_path(@listing) %>
+
+<% if @listing.user == current_user %>
+  <%= button_to 'Edit Listing', edit_listing_path(@listing), class: 'btn btn-primary' %>
+  <%= button_to 'Delete Listing', listing_path(@listing), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+<% end %>
