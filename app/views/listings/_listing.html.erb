@@ -1,6 +1,9 @@
 
-<li class="list-group-item d-flex justify-content-between align-items-center">
-  <strong><%= listing.name %></strong> - $<%= listing.price_per_hour %><br>
-  <p><%= listing.description %></p>
-</li>
-
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="https://st.hzcdn.com/simgs/pictures/pools/beverly-ddla-design-landscape-architecture-img~352107440d90dc06_14-1682-1-1907823.jpg" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title"><%= listing.name %></h5>
+    <p class="card-text"><%= listing.description %> - $<%= listing.price_per_hour %></p>
+    <%= link_to "View Listing", listing_path(listing), class: "btn btn-primary" %>
+  </div>
+</div>

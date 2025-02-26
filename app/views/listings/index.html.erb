@@ -5,6 +5,7 @@
 
   <ul data-insert-in-list-target="items" class="list-group border border-white border-0">
     <% @listings.each do |listing| %>
+      <div class="col-sm-3">
       <%= link_to listing_path(listing), class: "text-decoration-none" do %>
         <%= render "listings/listing", listing: listing %>
       <% end %>
