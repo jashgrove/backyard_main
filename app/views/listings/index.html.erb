@@ -1,0 +1,27 @@
+<h1>Listings</h1>
+
+
+<div data-controller="insert-in-list">
+
+  <ul data-insert-in-list-target="items" class="list-group border border-white border-0">
+    <% @listings.each do |listing| %>
+      <%= link_to listing_path(listing), class: "text-decoration-none" do %>
+        <%= render "listings/listing", listing: listing %>
+      <% end %>
+
+    <% end %>
+  </div>
+</div>
+
+
+
+  <div data-controller="toggle" class="mt-5">
+    <button data-action="click->toggle#fire" class="btn btn-outline-primary">
+      Create New Listing
+    </button>
+
+    <div data-toggle-target="togglableElement" class="d-none" >
+      <%= render "form", listing: @listing %>
+    </div>
+  </div>
+</div>

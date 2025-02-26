@@ -1,0 +1,7 @@
+<%= simple_form_for @listing, data: { insert_in_list_target: "form", action: "submit->insert-in-list#send" } do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :address %>
+  <%= f.input :price_per_hour %>
+  <%= f.button :submit %>
+<% end %>

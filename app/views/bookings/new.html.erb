@@ -1,0 +1,8 @@
+<div data-controller="toggle">
+  <button data-action="click->toggle#fire" class="btn btn-outline-primary">
+    Book now!
+  </button>
+  <div data-toggle-target="togglableElement" class="d-none">
+    <%= render "shared/booking_form" %>
+  </div>
+</div>
