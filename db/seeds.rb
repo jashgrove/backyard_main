@@ -12,6 +12,15 @@ require "faker"
 User.destroy_all
 Listing.destroy_all
 
+#  for login
+user = User.create(
+    email: "user@gmail.com",
+    password: "password",
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    address: Faker::Address.full_address,
+  )
+
 5.times do
 
   user = User.create(
@@ -22,11 +31,19 @@ Listing.destroy_all
     address: Faker::Address.full_address,
   )
 
-  Listing.create(
+  listing = Listing.create(
     name: Faker::Company.name,
     description: Faker::Company.catch_phrase,
     address: Faker::Address.full_address,
     price_per_hour: Faker::Number.decimal(l_digits: 2),
     user: user,
   )
+  3.times do
+    ListingReview.create(
+      content: Faker::Lorem.paragraph,
+      rating: Faker::Number.between(from: 1, to: 5),
+      user: user,
+      listing: listing,
+    )
+  end
 end
