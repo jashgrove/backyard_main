@@ -6,7 +6,7 @@ class ListingsController < ApplicationController
     @listing = Listing.new
     @current_user = current_user
 
-     # The `geocoded` scope filters only listings with coordinates
+    # The `geocoded` scope filters only listings with coordinates
     @markers = @listings.geocoded.map do |listing|
       {
         lat: listing.latitude,
@@ -32,10 +32,20 @@ class ListingsController < ApplicationController
     end
 
     @listing = Listing.find(params[:id])
-    @bookings = @listing.bookings.where("start_date > ?", DateTime.now).where(approved: true)
+    @bookings = @listing.bookings.where("start_date > ?", DateTime.now).where(status: "approved")
     @listing_reviews = @listing.listing_reviews
     @review = ListingReview.new
     @booking = Booking.new
+
+    # The `geocoded` scope filters only listings with coordinates
+    @markers = Listing.geocoded.where(id: params[:id]).map do |listing|
+      {
+        lat: listing.latitude,
+        lng: listing.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: { listing: listing }),
+        marker_html: render_to_string(partial: "marker")
+      }
+    end
   end
 
   def create
@@ -68,9 +78,10 @@ class ListingsController < ApplicationController
     @listing.update(listing_params)
     redirect_to listing_path(@listing)
   end
+
   private
 
   def listing_params
-    params.require(:listing).permit(:name, :description, :address, :price_per_hour)
+    params.require(:listing).permit(:name, :description, :address, :price_per_hour, :photo)
   end
 end

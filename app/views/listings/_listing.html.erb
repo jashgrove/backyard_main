@@ -1,6 +1,10 @@
-
 <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="https://st.hzcdn.com/simgs/pictures/pools/beverly-ddla-design-landscape-architecture-img~352107440d90dc06_14-1682-1-1907823.jpg" alt="Card image cap">
+  <% if listing.photo.attached? %>
+    <%= cl_image_tag listing.photo.key, class: "card-img-top", style: "object-fit: cover; height: 200px; width: 100%;" %>
+  <% else %>
+    <%= image_tag 'https://leisurepoolscanada.ca/wp-content/uploads/2020/06/best-type-of-swimming-pool-for-my-home_2.jpg', class: "card-img-top", style: "object-fit: cover; height: 200px; width: 100%;" %>
+  <% end %>
+
   <div class="card-body">
     <h5 class="card-title"><%= listing.name %></h5>
     <p class="card-text"><%= listing.description %> - $<%= listing.price_per_hour %></p>

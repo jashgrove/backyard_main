@@ -5,7 +5,7 @@
     <% @listings.each do |listing| %>
       <div class="col-sm-3 mb-4">
         <%= link_to listing_path(listing), class: "text-decoration-none" do %>
-          <%= render "listings/listing", listing: listing %>
+        <%= render partial: "listings/listing", locals: { listing: listing } %>
         <% end %>
       </div>
     <% end %>

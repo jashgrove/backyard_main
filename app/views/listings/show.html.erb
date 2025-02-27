@@ -1,46 +1,44 @@
-<h1><%= @listing.name %></h1>
-<div class="card my-4">
+<h1 class="mt-5"><%= @listing.name %></h1>
+<div class="card shadow p-3 mb-5 bg-body rounded border rounded-5 d-flex flex-row my-4">
   <div class="card-body">
-        <p class="card-text me-3">Address: <%= @listing.address %></p>
-        <p class="card-text me-3">Description: <%= @listing.description %></p>
-        <p class="card-text me-3">Price per hour: <%= @listing.price_per_hour %></p>
-    </div>
+    <p class="card-text me-3"><strong>Address:</strong> <%= @listing.address %></p>
+    <p class="card-text me-3"><strong>Description:</strong> <%= @listing.description %></p>
+    <p class="card-text me-3"><strong>Price per hour:</strong> $<%= @listing.price_per_hour %></p>
   </div>
+  <div class="-listing-map border rounded-5 m-auto" style="width: 80%; height: 600px;"
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
+</div>
 
-
-
-<% if @listing.user == current_user %>
-  <%= button_to 'Edit Listing', edit_listing_path(@listing), class: 'btn btn-primary' %>
+<% if current_user!= nil && @listing.user_id == current_user.id %>
+  <%= link_to 'Edit Listing', edit_listing_path(@listing), class: 'btn btn-primary' %>
   <%= button_to 'Delete Listing', listing_path(@listing), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
 <% end %>
 
-  <div class="card my-5 p-4" data-controller="add-review">
+  <div class="card border-0 my-5 p-4" data-controller="add-review">
     <h2>Reviews</h2>
     <hr>
     <% if @listing_reviews.any? %>
-      <div class="card my-3">
-        <div class="card-body">
           <% @listing_reviews.each do |review| %>
-            <p class="card-text">Posted by: <%= "#{review.user.first_name} #{review.user.last_name}" %></p>
-            <p class="card-text">Rating: <%= review.rating %></p>
-            <p class="card-text">Comment: <%= review.content %></p>
-            <hr>
+            <div class="card my-3 shadow p-3 mb-5 bg-body rounded">
+              <div class="card-body">
+                <p class="card-text">Posted by: <%= "#{review.user.first_name} #{review.user.last_name}" %></p>
+                <p class="card-text">Rating: <%= review.rating %></p>
+                <p class="card-text">Comment: <%= review.content %></p>
+              </div>
+            </div>
           <% end %>
-        </div>
-      </div>
       <% end %>
 
       <% if user_signed_in? %>
         <button type="button" class="btn btn-outline-primary" data-action="click->add-review#showForm">
-        Add a new review
-      </button>
-      <% else %>
-        <button type="button" class="btn btn-outline-primary disabled" data-action="click->add-review#showForm">
           Add a new review
         </button>
       <% end %>
 
-    <div class="review-form d-none" data-add-review-target="addReviewForm" >
+    <div class="review-form p-4 d-none" data-add-review-target="addReviewForm" >
       <%= render 'review_form', review: @review, listing: @listing, data: { add_review_target: "form" }  %>
     </div>
   </div>
@@ -48,10 +46,6 @@
 <!-- Button trigger modal -->
 <% if user_signed_in? %>
   <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">
-    Book listing
-  </button>
-<% else %>
- <button type="button" class="btn btn-outline-primary disabled" data-bs-toggle="modal" data-bs-target="#bookingModal">
     Book listing
   </button>
 <% end %>
