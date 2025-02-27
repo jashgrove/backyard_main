@@ -6,7 +6,7 @@ class ListingsController < ApplicationController
     @listing = Listing.new
     @current_user = current_user
 
-     # The `geocoded` scope filters only listings with coordinates
+    # The `geocoded` scope filters only listings with coordinates
     @markers = @listings.geocoded.map do |listing|
       {
         lat: listing.latitude,
@@ -27,7 +27,7 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.find(params[:id])
-    @bookings = @listing.bookings.where("start_date > ?", DateTime.now).where(approved: true)
+    @bookings = @listing.bookings.where("start_date > ?", DateTime.now).where(status: "approved")
     @listing_reviews = @listing.listing_reviews
     @review = ListingReview.new
     @booking = Booking.new
