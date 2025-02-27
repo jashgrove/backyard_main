@@ -46,22 +46,12 @@
   </div>
 
 <!-- Button trigger modal -->
-
-<div data-controller="datepicker"
-     data-booked-dates="<%= @bookings.where(status: 'approved').pluck(:start_date).map { |date| date.strftime('%Y-%m-%d') }.to_json %>">
-  <% if user_signed_in? %>
-    <input type="text" data-action="click->datepicker#open">
-  <% else %>
-    <input type="text" class="disabled" data-action="click->datepicker#open" disabled title="Please sign in to book a listing">
-  <% end %>
-</div>
-
 <% if user_signed_in? %>
   <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">
     Book listing
   </button>
 <% else %>
-  <button type="button" class="btn btn-outline-primary disabled" data-bs-toggle="modal" data-bs-target="#bookingModal">
+ <button type="button" class="btn btn-outline-primary disabled" data-bs-toggle="modal" data-bs-target="#bookingModal">
     Book listing
   </button>
 <% end %>
