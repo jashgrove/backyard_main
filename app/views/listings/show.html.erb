@@ -14,7 +14,7 @@
 
 <% if current_user!= nil && @listing.user_id == current_user.id %>
   <%= link_to 'Edit Listing', edit_listing_path(@listing), class: 'btn btn-primary' %>
-  <%= link_to 'Delete Listing', listing_path(@listing), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  <%= button_to 'Delete Listing', listing_path(@listing), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
 <% end %>
 
   <div class="card border-0 my-5 p-4" data-controller="add-review">
