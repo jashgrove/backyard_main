@@ -1,6 +1,4 @@
-<h1>Here are your bookings</h1>
-
-
+<h1>Bookings</h1>
 <% if current_user.bookings.any? %>
   <% current_user.bookings.each do |booking| %>
   <br>
@@ -10,6 +8,41 @@
     <ul>
       <li><%= booking.start_date %></li>
       <li><%= booking.end_date %></li>
+    </ul>
+  <% end %>
+  </li>
+<% end %>
+
+
+
+
+<h1>Booking requests</h1>
+
+
+<% if current_user.listings.any? %>
+  <% current_user.listings.each do |listing| %>
+    <h2><%= listing.name %></h2>
+    <ul>
+      <% listing.bookings.each do |booking| %>
+        <li><%= booking.user.email %></li>
+        <li><%= booking.start_date %></li>
+        <li><%= booking.end_date %></li>
+
+        <% if listing.bookings.where(status: 'approved').none? && listing.bookings.where(status: 'pending').any? %>
+
+            <%= link_to "Approve", my_bookings_approve_path(booking),
+              method: :patch,
+              data: { confirm: "Are you sure you want to approve this booking?" },
+              class: "btn btn-success" %>
+
+
+            <%= link_to "Deny", my_bookings_deny_path(booking),
+              method: :patch,
+              data: { confirm: "Are you sure you want to deny this booking?" },
+              class: "btn btn-danger" %>
+
+        <% end %>
+      <% end %>
     </ul>
   <% end %>
 <% end %>
