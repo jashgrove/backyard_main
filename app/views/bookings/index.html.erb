@@ -1,37 +1,12 @@
 <h1>Here are your bookings</h1>
 
-<% if current_user.listings.any? %>
-  <% current_user.listings.each do |listing| %>
-    <h2><%= listing.name %></h2>
-    <ul>
-      <% listing.bookings.each do |booking| %>
-        <li><%= booking.user.email %></li>
-        <li><%= booking.start_date %></li>
-        <li><%= booking.end_date %></li>
-
-        <% if listing.bookings.where(status: 'approved').none? && listing.bookings.where(status: 'pending').any? %>
-          <li>
-            <%= link_to "Approve", my_bookings_approve_path(booking),
-              method: :patch,
-              data: { confirm: "Are you sure you want to approve this booking?" },
-              class: "btn btn-success" %>
-          </li>
-          <li>
-            <%= link_to "Deny", my_bookings_deny_path(booking),
-              method: :patch,
-              data: { confirm: "Are you sure you want to deny this booking?" },
-              class: "btn btn-danger" %>
-          </li>
-        <% end %>
-      <% end %>
-    </ul>
-  <% end %>
-<% end %>
 
 <% if current_user.bookings.any? %>
-  <h1>Your Bookings</h1>
   <% current_user.bookings.each do |booking| %>
-    <h2><%= booking.listing.name %></h2>
+  <br>
+    <h2><%= booking.listing.name %> (<%= booking.status %>)</h2>
+
+    <h3>Total Price: $<%= (booking.end_date - booking.start_date) / 3600  * booking.listing.price_per_hour %></h3>
     <ul>
       <li><%= booking.start_date %></li>
       <li><%= booking.end_date %></li>
