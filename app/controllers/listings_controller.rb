@@ -26,6 +26,11 @@ class ListingsController < ApplicationController
   end
 
   def show
+    unless params[:id] =~ /^\d+$/
+      redirect_to root_path, alert: "Invalid listing ID"
+      return
+    end
+
     @listing = Listing.find(params[:id])
     @bookings = @listing.bookings.where("start_date > ?", DateTime.now).where(status: "approved")
     @listing_reviews = @listing.listing_reviews
