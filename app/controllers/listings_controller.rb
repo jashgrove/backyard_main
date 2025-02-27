@@ -7,7 +7,7 @@ class ListingsController < ApplicationController
     @current_user = current_user
 
      # The `geocoded` scope filters only listings with coordinates
-    @markers = Listing.geocoded.map do |listing|
+    @markers = @listings.geocoded.map do |listing|
       {
         lat: listing.latitude,
         lng: listing.longitude,
