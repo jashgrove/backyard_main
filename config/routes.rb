@@ -11,13 +11,13 @@ Rails.application.routes.draw do
     resources :bookings, only: [:index, :destroy]
   end
 
-  get '/my_bookings', to: 'bookings#index', as: 'my_bookings'
-
-  get '/my_bookings/pending', to: 'bookings#pending', as: "my_bookings_pending"
-
   get '/my_bookings/:id/approve', to: 'bookings#approve', as: 'my_bookings_approve'
 
   get '/my_bookings/:id/deny', to: 'bookings#deny', as: 'my_bookings_deny'
+
+  get '/my_bookings/pending', to: 'bookings#pending', as: "my_bookings_pending"
+
+  get '/my_bookings', to: 'bookings#index', as: 'my_bookings'
 
   get '/my_listings', to: 'listings#my_index', as: 'my_listings'
 
