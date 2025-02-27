@@ -4,7 +4,19 @@ require "faker"
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
 # Example:
-#
+cloudinary_images = [
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689601/pexels-julia-m-cameron-8841157_nbksxw.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689601/pexels-daliladalprat-1843647_slz7dg.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689600/pexels-marianne-67058-238377_maw0fx.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689600/pexels-marianne-67058-238377_maw0fx.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689600/pexels-myburgh-2513972_i3x9lb.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689600/pexels-myburgh-2513972_i3x9lb.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689600/pexels-jason-boyd-1388339-3209049_ufcxfn.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689600/pexels-marianne-67058-238385_m1dygk.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689599/pexels-blankspace-2615407_pvua6t.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689599/pexels-bertellifotografia-2376989_oaq6m4.jpg"
+]
+
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
@@ -36,6 +48,7 @@ user = User.create(
     description: Faker::Company.catch_phrase,
     address: Faker::Address.full_address,
     price_per_hour: Faker::Number.decimal(l_digits: 2),
+    image_url: cloudinary_images.sample,
     user: user,
   )
   3.times do
