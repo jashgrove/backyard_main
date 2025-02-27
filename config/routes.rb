@@ -21,5 +21,4 @@ Rails.application.routes.draw do
 
   get '/my_listings', to: 'listings#my_index', as: 'my_listings'
 
-
 end
