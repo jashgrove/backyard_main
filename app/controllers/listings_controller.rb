@@ -17,6 +17,10 @@ class ListingsController < ApplicationController
     end
   end
 
+  def my_index
+    @listings = current_user.listings
+  end
+
   def new
     @listing = Listing.new
   end
