@@ -1,12 +1,14 @@
+.card-body {
+  .listing-link {
+    font-family: $body-font;
+    background-color: #ed4b82;
+    border-color: #ed4b82;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
-.card-body .listing-link {
-  background-color: #ed4b82;
-  border-color: #ed4b82;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.listing-link:hover {
-  background-color: #f178a1;
-  border-color: #f178a1;
-  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
+    &:hover {
+      background-color: #f178a1;
+      border-color: #f178a1;
+      box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
+    }
+  }
 }
