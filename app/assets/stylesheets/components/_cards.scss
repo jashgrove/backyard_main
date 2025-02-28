@@ -1,24 +1,11 @@
-.card-container {
-  display: grid;
-  gap: 20px;
-  padding: 20px;
-  justify-content: center;
+
+.card-body .listing-link {
+  background-color: #ed4b82;
+  border-color: #ed4b82;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card {
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.listing-image {
-  width: 100%;
-  height: 200%;
-  object-fit: cover;
-}
-
-.card-body {
-  padding: 16px;
-  text-align: center;
-}
+.listing-link:hover {
+  background-color: #f178a1;
+  border-color: #f178a1;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
