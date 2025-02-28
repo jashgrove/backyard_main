@@ -1,4 +1,6 @@
 require "faker"
+require "open-uri"
+require "json"
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
@@ -59,43 +61,76 @@ backyard_descriptions = [
     "A peaceful urban retreat surrounded by greenery, perfect for enjoying Montreal warm summer evenings."
   ]
 
+  reviews_listings = [
+    "Cozy backyard with lots of greenery and soft lighting. Feels like a hidden escape from the city.",
+    "Spacious patio with modern furniture and a fire pit. Great for evening gatherings.",
+    "Small but charming, surrounded by flowers and a vine-covered fence. Perfect for a quiet coffee.",
+    "Riverside backyard with a peaceful view. Gets breezy in the evenings, bring a sweater.",
+    "A backyard designed for BBQ lovers, with a built-in grill and plenty of seating.",
+    "Rustic setting with a mix of stone and wood, ideal for relaxed summer nights.",
+    "Tucked away behind an old brick house, this backyard feels like a secret garden.",
+    "Minimalist space with a simple deck and hanging lights. Best for casual get-togethers.",
+    "A backyard with a small pond and plenty of trees. A little slice of nature in the city.",
+    "Lush grass, comfortable hammocks, and a cozy fire pit make this backyard a great retreat."
+  ]
+
+cloudinary_urls = [
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689601/pexels-julia-m-cameron-8841157_nbksxw.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689601/pexels-daliladalprat-1843647_slz7dg.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689600/pexels-marianne-67058-238377_maw0fx.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689600/pexels-marianne-67058-238377_maw0fx.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689600/pexels-myburgh-2513972_i3x9lb.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689600/pexels-myburgh-2513972_i3x9lb.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689600/pexels-jason-boyd-1388339-3209049_ufcxfn.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689600/pexels-marianne-67058-238385_m1dygk.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689599/pexels-blankspace-2615407_pvua6t.jpg",
+"https://res.cloudinary.com/ducax2ucs/image/upload/v1740689599/pexels-bertellifotografia-2376989_oaq6m4.jpg"
+]
+
 ListingReview.destroy_all
 Booking.destroy_all
 Listing.destroy_all
 User.destroy_all
 
 #  for login
-user = User.create(
-    email: "user@gmail.com",
+users = 10.times.map do |i|
+  User.create!(
+    email: Faker::Internet.unique.email,
     password: "password",
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    address: montreal_addresses.sample,
+    address: montreal_addresses[i % montreal_addresses.length]
   )
+end
 
-5.times do
+cloudinary_urls.shuffle!
+backyard_names.shuffle!
+backyard_descriptions.shuffle!
 
-  user = User.create(
-    email: Faker::Internet.email,
-    password: "password",
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    address: montreal_addresses.sample,
-  )
+10.times do |i|
+  user = users[i]
 
-  listing = Listing.create(
-    name: backyard_names.sample,
-    description: backyard_descriptions.sample,
-    address: montreal_addresses.sample,
+  listing = Listing.create!(
+    name: backyard_names[i],
+    description: backyard_descriptions[i % backyard_descriptions.length],
+    address: montreal_addresses[i % montreal_addresses.length],
     price_per_hour: Faker::Number.decimal(l_digits: 2),
-    user: user,
+    user: user
   )
-  3.times do
-    ListingReview.create(
-      content: Faker::Lorem.paragraph,
+
+  file = URI.open(cloudinary_urls[i])
+  listing.photo.attach(io: file, filename: "listing_#{i}.jpg", content_type: "image/jpeg")
+
+
+  3.times do |j|
+    reviewer = users.sample
+    next if reviewer == user
+
+    ListingReview.create!(
+      content: reviews_listings.sample,
       rating: Faker::Number.between(from: 1, to: 5),
-      user: user,
-      listing: listing,
+      user: reviewer,
+      listing: listing
     )
   end
 end
