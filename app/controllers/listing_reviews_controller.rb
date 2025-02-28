@@ -8,9 +8,10 @@ class ListingReviewsController < ApplicationController
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to listing_path(@listing) }
+        format.html { redirect_to listing_path(@listing), notice: "Review was successfully submitted!" }
         format.json # Follows the classic Rails flow and look for a create.json
       else
+        flash[:alert] = "Booking could not be created. Please check the errors."
         format.html { render listing_path(@listing), status: :unprocessable_entity }
         format.json # Follows the classic Rails flow and look for a create.json
       end

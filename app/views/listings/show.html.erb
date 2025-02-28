@@ -5,7 +5,7 @@
     <p class="card-text me-3"><strong>Description:</strong> <%= @listing.description %></p>
     <p class="card-text me-3"><strong>Price per hour:</strong> $<%= @listing.price_per_hour %></p>
   </div>
-  <div class="-listing-map border rounded-5 m-auto" style="width: 80%; height: 600px;"
+  <div class="listing-map border rounded-5 m-auto" style="width: 80%; height: 600px;"
       data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
@@ -33,16 +33,21 @@
       <% end %>
 
       <% if user_signed_in? %>
-        <button type="button" class="btn btn-outline-primary" data-action="click->add-review#showForm">
-          Add a new review
-        </button>
+        <% if @review != nil %>
+          <button type="button" class="btn btn-outline-primary" data-action="click->add-review#showForm">
+            Add a new review
+          </button>
+          <div class="review-form p-4 d-none" data-add-review-target="addReviewForm" >
+            <%= render 'review_form', review: @review, listing: @listing, data: { add_review_target: "form" }  %>
+          </div>
+        <% else %>
+          <button type="button" class="btn btn-outline-primary disabled" data-action="click->add-review#showForm">
+            Review submitted
+          </button>
+        <% end %>
       <% end %>
 
-    <div class="review-form p-4 d-none" data-add-review-target="addReviewForm" >
-      <%= render 'review_form', review: @review, listing: @listing, data: { add_review_target: "form" }  %>
-    </div>
   </div>
-
 <!-- Button trigger modal -->
 <% if user_signed_in? %>
   <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">

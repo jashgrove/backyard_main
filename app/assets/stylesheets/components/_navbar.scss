@@ -1,6 +1,6 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background: #fad2e0;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -15,14 +15,14 @@
   display: inline-block;
   padding: 6px 12px;
   margin: 5px;
-  background-color: rgb(246, 194, 194);
+  background-color: #ed4b82;
   border-radius: 24px;
   font-weight: bold;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
 }
 
 .navbar-button:hover {
-  background-color:  rgb(242, 151, 151);
+  background-color:  #f178a1;
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
   transform: translateY(-2px);
 }
@@ -35,7 +35,7 @@
 }
 
 .navbar-logo-wrapper:hover {
-  background-color:  rgb(242, 151, 151);
+  background-color: #f178a1;
   border-radius: 24px;
   padding: 3px 6px;
   margin: 5px;

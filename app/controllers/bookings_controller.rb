@@ -19,8 +19,9 @@ class BookingsController < ApplicationController
       if @booking.save
         format.html { redirect_to listing_path(@listing) }
         format.json
-        flash[:alert] = "Booking succesfully created"
+        flash[:success] = "Booking succesfully created"
       else
+        flash[:alert] = "Booking could not be created. Please check the errors."
         format.html { redirect_to listing_path(@listing), status: :unprocessable_entity }
         format.json
       end
@@ -33,7 +34,7 @@ class BookingsController < ApplicationController
 
   def approve
     @bookings = Booking.find(params[:id])
-    flash[:notice] = "Booking successfully approved" if @bookings.update(status: 'approved')
+    flash[:success] = "Booking successfully approved" if @bookings.update(status: 'approved')
   end
 
   def deny
