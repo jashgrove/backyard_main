@@ -13,8 +13,7 @@
 </div>
 
 <% if current_user!= nil && @listing.user_id == current_user.id %>
-  <%= link_to 'Edit Listing', edit_listing_path(@listing), class: 'btn btn-primary' %>
-  <%= button_to 'Delete Listing', listing_path(@listing), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+<%= link_to 'Edit Listing', edit_listing_path(@listing), class: 'btn', style: 'background-color: #ff69b4; color: white;' %>
 <% end %>
 
   <div class="card border-0 my-5 p-4" data-controller="add-review">
@@ -50,7 +49,7 @@
   </div>
 <!-- Button trigger modal -->
 <% if user_signed_in? %>
-  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#bookingModal">
+  <button type="button" class="btn btn-pink" data-bs-toggle="modal" data-bs-target="#bookingModal">
     Book listing
   </button>
 <% end %>
@@ -71,4 +70,4 @@
 </div>
 
 <hr>
-<%= link_to "Back to list", listings_path, class: 'text-decoration-none mt-5' %>
+<%= link_to "Back to list", listings_path, class: 'btn btn-pink' %>
