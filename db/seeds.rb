@@ -90,7 +90,15 @@ user = User.create(
     price_per_hour: Faker::Number.decimal(l_digits: 2),
     user: user,
   )
-  3.times do
+  Booking.create(
+    total_price: Faker::Number.decimal(l_digits: 2),
+    start_date: Faker::Time.between(from: 5.days.ago, to: 3.day.ago),
+    end_date: Faker::Time.between(from: 2.days.ago, to: 1.days.ago),
+    listing: listing,
+    user: user,
+  )
+
+  1.times do
     ListingReview.create(
       content: Faker::Lorem.paragraph,
       rating: Faker::Number.between(from: 1, to: 5),
