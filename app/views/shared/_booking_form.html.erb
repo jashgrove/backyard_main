@@ -7,6 +7,8 @@
   <%= f.input :end_date,
         as: :string,
         input_html: { data: { controller: "datepicker" }, class: "", required: true } %>
-  <%= f.button :submit, "Book Now", class: 'btn btn-outline-primary' %>
-    <h3>            Price is $<%= listing.price_per_hour  %>/hour</h3>
+  <div class="d-flex justify-content-between align-items-center mt-3">
+    <p class="mb-0 text-muted"> $<%= listing.price_per_hour %> CAD / hour</p>
+    <%= f.button :submit, "Book Now", class: 'btn btn-pink' %>
+  </div>
 <% end %>
