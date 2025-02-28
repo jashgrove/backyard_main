@@ -2,15 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 // Define fonts for body and headers
-$body-font: "Baloo 2", "Baloo 2", "Baloo 2";
-$headers-font: "Baloo 2", "Baloo 2", "Baloo 2";
+$body-font: "Baloo 2", "Helvetica", "sans-serif";
+$headers-font: "Baloo 2", "Helvetica", "sans-serif";
 
-// To use a font file (.woff) uncomment following lines
-// @font-face {
-//   font-family: "Font Name";
-//   src: font-url('FontFile.eot');
-//   src: font-url('FontFile.eot?#iefix') format('embedded-opentype'),
-//        font-url('FontFile.woff') format('woff'),
-//        font-url('FontFile.ttf') format('truetype')
-// }
-// $my-font: "Font Name";
+@font-face {
+  font-family: "Baloo 2";
+  src: url('path-to-font/Baloo2-Regular.eot');
+  src: url('path-to-font/Baloo2-Regular.eot?#iefix') format('embedded-opentype'),
+      url('path-to-font/Baloo2-Regular.woff') format('woff'),
+      url('path-to-font/Baloo2-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
