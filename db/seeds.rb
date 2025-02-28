@@ -87,6 +87,7 @@ backyard_descriptions = [
     "https://res.cloudinary.com/ducax2ucs/image/upload/v1740760540/pexels-pixabay-261410_ejdux4.jpg"
   ]
 
+
 ListingReview.destroy_all
 Booking.destroy_all
 Listing.destroy_all
