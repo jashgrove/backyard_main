@@ -21,6 +21,7 @@ class BookingsController < ApplicationController
         format.json
         flash[:alert] = "Booking succesfully created"
       else
+        flash[:alert] = "Booking could not be created. Please check the errors."
         format.html { redirect_to listing_path(@listing), status: :unprocessable_entity }
         format.json
       end
