@@ -34,7 +34,7 @@ class ListingsController < ApplicationController
     @listing = Listing.find(params[:id])
     @bookings = @listing.bookings.where("start_date > ?", DateTime.now).where(status: "approved")
     @listing_reviews = @listing.listing_reviews
-    if current_user && current_user != @listing.user && @listing.bookings.find { |booking| booking.user_id == current_user.id && booking.start_date < DateTime.now }
+    if current_user && current_user != @listing.user # && @listing.bookings.find { |booking| booking.user_id == current_user.id && booking.start_date < DateTime.now }
       @review = ListingReview.new unless @listing_reviews.find { |review| review.user_id == current_user.id }
     end
     @booking = Booking.new
