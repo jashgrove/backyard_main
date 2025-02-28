@@ -2,6 +2,15 @@
 <h1 class="mb-5">Bookings</h1>
 <% if current_user.bookings.any? %>
   <% current_user.bookings.each do |booking| %>
+  <br>
+    <h2><%= booking.listing.name %> (<%= booking.status %>)</h2>
+
+    <h3>Total Price: $<%= (booking.end_date - booking.start_date) / 3600  * booking.listing.price_per_hour %></h3>
+    <ul>
+      <li><%= booking.start_date %></li>
+      <li><%= booking.end_date %></li>
+    </ul>
+<%= link_to "More details", listing_path(booking.listing)%>
   <div class="col-sm-3 mb-4">
     <div class="card" style="width: 18rem;">
       <% if booking.listing.photo.attached? %>
@@ -20,6 +29,11 @@
   <% end %>
 <% end %>
 </div>
+
+<br>
+<br>
+
+<h1>Booking requests</h1>
 
 
 <h1 class="mt-5">Booking requests</h1>
