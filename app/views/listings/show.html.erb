@@ -7,7 +7,7 @@
       <%= image_tag 'https://leisurepoolscanada.ca/wp-content/uploads/2020/06/best-type-of-swimming-pool-for-my-home_2.jpg', class: "listing-image" %>
     <% end %>
 
-    <div class="card shadow p-3 mb-5 bg-body rounded border rounded-5">
+    <div class="card shadow p-3 mb-5 bg-body rounded-top">
       <div class="card-body">
         <p class="card-text"><strong>Address:</strong> <%= @listing.address %></p>
         <p class="card-text"><strong>Description:</strong> <%= @listing.description %></p>
@@ -21,13 +21,13 @@
     <% end %>
   </div>
 
-  <div class="listing-map-container">
+
     <div class="listing-map border rounded-5"
         data-controller="map"
         data-map-markers-value="<%= @markers.to_json %>"
         data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
-  </div>
+
 </div>
 
 
