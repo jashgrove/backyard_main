@@ -19,10 +19,10 @@
         <%= image_tag 'https://leisurepoolscanada.ca/wp-content/uploads/2020/06/best-type-of-swimming-pool-for-my-home_2.jpg', class: "card-img-top", style: "object-fit: cover; height: 200px; width: 100%;" %>
       <% end %>
     <div class="card-body">
-      <h3><%= booking.listing.name %> (<%= booking.status %>)</h3>
-      <p class="mt-2"><strong>Total Price:</strong> $<%= (booking.end_date - booking.start_date) / 3600  * booking.listing.price_per_hour %></p>
-      <span><strong>From: </strong><%= booking.start_date.strftime("%B %d, %Y %I:%M %p") %></span>
-      <span><strong>To: </strong><%= booking.end_date.strftime("%B %d, %Y %I:%M %p") %></span>
+      <h3 class=""><%= booking.listing.name %> (<%= booking.status %>)</h3>
+      <p class="mt-4"><strong>Total Price:</strong> $<%= ((booking.end_date - booking.start_date) / 3600  * booking.listing.price_per_hour).round(2) %></p>
+      <p><strong>From: </strong><%= booking.start_date.strftime("%B %d, %Y %I:%M %p") %></p>
+      <p><strong>To: </strong><%= booking.end_date.strftime("%B %d, %Y %I:%M %p") %></p>
       </div>
    </div>
   </div>
@@ -38,30 +38,38 @@
 
 <h1 class="mt-5">Booking requests</h1>
 
+<div class="p-5">
 <% if current_user.listings.any? %>
   <% current_user.listings.each do |listing| %>
-    <h2><%= listing.name %></h2>
-    <ul>
+    <div class="row mt-5">
+    <h2 class="mb-5"><%= listing.name %></h2>
       <% listing.bookings.each do |booking| %>
-        <li><%= booking.user.email %></li>
-        <li><%= booking.start_date %></li>
-        <li><%= booking.end_date %></li>
+        <div class="col-sm-3 mb-4">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h3>Booking details</h3>
+              <p class="mt-4"><strong>Guest Full name: </strong><%= "#{booking.user.first_name} #{booking.user.last_name}" %></p>
+              <p><strong>Guest email: </strong><%= booking.user.email %></p>
+              <p><strong>From: </strong><%= booking.start_date.strftime("%B %d, %Y %I:%M %p") %></p>
+              <p><strong>To: </strong><%= booking.end_date.strftime("%B %d, %Y %I:%M %p") %></p>
 
-        <% if listing.bookings.where(status: 'approved').none? && listing.bookings.where(status: 'pending').any? %>
+              <% if listing.bookings.where(status: 'approved').none? && listing.bookings.where(status: 'pending').any? %>
+                  <%= link_to "Approve", my_bookings_approve_path(booking),
+                    method: :patch,
+                    data: { confirm: "Are you sure you want to approve this booking?" },
+                    class: "btn btn-outline-primary" %>
 
-            <%= link_to "Approve", my_bookings_approve_path(booking),
-              method: :patch,
-              data: { confirm: "Are you sure you want to approve this booking?" },
-              class: "btn btn-success" %>
-
-
-            <%= link_to "Deny", my_bookings_deny_path(booking),
-              method: :patch,
-              data: { confirm: "Are you sure you want to deny this booking?" },
-              class: "btn btn-danger" %>
-
-        <% end %>
+                  <%= link_to "Deny", my_bookings_deny_path(booking),
+                    method: :patch,
+                    data: { confirm: "Are you sure you want to deny this booking?" },
+                    class: "btn btn-outline-primary" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
       <% end %>
-    </ul>
+    </div>
   <% end %>
 <% end %>
+
+</div>
