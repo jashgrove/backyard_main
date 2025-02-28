@@ -1,4 +1,5 @@
-<h1>Bookings</h1>
+<div class="row mt-5">
+<h1 class="mb-5">Bookings</h1>
 <% if current_user.bookings.any? %>
   <% current_user.bookings.each do |booking| %>
   <br>
@@ -9,15 +10,33 @@
       <li><%= booking.start_date %></li>
       <li><%= booking.end_date %></li>
     </ul>
+<%= link_to "More details", listing_path(booking.listing)%>
+  <div class="col-sm-3 mb-4">
+    <div class="card" style="width: 18rem;">
+      <% if booking.listing.photo.attached? %>
+      <%= cl_image_tag booking.listing.photo.key, class: "card-img-top listing-image"%>
+      <% else %>
+        <%= image_tag 'https://leisurepoolscanada.ca/wp-content/uploads/2020/06/best-type-of-swimming-pool-for-my-home_2.jpg', class: "card-img-top", style: "object-fit: cover; height: 200px; width: 100%;" %>
+      <% end %>
+    <div class="card-body">
+      <h3><%= booking.listing.name %> (<%= booking.status %>)</h3>
+      <p class="mt-2"><strong>Total Price:</strong> $<%= (booking.end_date - booking.start_date) / 3600  * booking.listing.price_per_hour %></p>
+      <span><strong>From: </strong><%= booking.start_date.strftime("%B %d, %Y %I:%M %p") %></span>
+      <span><strong>To: </strong><%= booking.end_date.strftime("%B %d, %Y %I:%M %p") %></span>
+      </div>
+   </div>
+  </div>
   <% end %>
-  </li>
 <% end %>
+</div>
 
-
-
+<br>
+<br>
 
 <h1>Booking requests</h1>
 
+
+<h1 class="mt-5">Booking requests</h1>
 
 <% if current_user.listings.any? %>
   <% current_user.listings.each do |listing| %>
