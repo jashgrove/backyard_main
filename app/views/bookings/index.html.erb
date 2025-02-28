@@ -9,12 +9,13 @@
       <li><%= booking.start_date %></li>
       <li><%= booking.end_date %></li>
     </ul>
+<%= link_to "More details", listing_path(booking.listing)%>
   <% end %>
   </li>
 <% end %>
 
-
-
+<br>
+<br>
 
 <h1>Booking requests</h1>
 
