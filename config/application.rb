@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module BackyardMain
   class Application < Rails::Application
+    config.assets.paths << Rails.root.join("app", "assets", "javascripts", "controllers")
     config.action_controller.raise_on_missing_callback_actions = false if Rails.version >= "7.1.0"
     config.generators do |generate|
       generate.assets false
