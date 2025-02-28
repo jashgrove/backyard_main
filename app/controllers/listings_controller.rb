@@ -40,13 +40,15 @@ class ListingsController < ApplicationController
     @booking = Booking.new
 
     # The `geocoded` scope filters only listings with coordinates
-    @markers = Listing.geocoded.where(id: params[:id]).map do |listing|
-      {
-        lat: listing.latitude,
-        lng: listing.longitude,
-        info_window_html: render_to_string(partial: "info_window", locals: { listing: listing }),
+    if @listing.latitude.present? && @listing.longitude.present?
+      @markers = [{
+        lat: @listing.latitude,
+        lng: @listing.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: { listing: @listing }),
         marker_html: render_to_string(partial: "marker")
-      }
+      }]
+    else
+      @markers = []
     end
   end
 

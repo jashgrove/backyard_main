@@ -1,16 +1,36 @@
 <h1 class="mt-5"><%= @listing.name %></h1>
-<div class="card shadow p-3 mb-5 bg-body rounded border rounded-5 d-flex flex-row my-4">
-  <div class="card-body">
-    <p class="card-text me-3"><strong>Address:</strong> <%= @listing.address %></p>
-    <p class="card-text me-3"><strong>Description:</strong> <%= @listing.description %></p>
-    <p class="card-text me-3"><strong>Price per hour:</strong> $<%= @listing.price_per_hour %></p>
+<div class="single-listing-container">
+  <div class="listing-details">
+    <% if @listing.photo.attached? %>
+      <%= cl_image_tag @listing.photo.key, class: "listing-image" %>
+    <% else %>
+      <%= image_tag 'https://leisurepoolscanada.ca/wp-content/uploads/2020/06/best-type-of-swimming-pool-for-my-home_2.jpg', class: "listing-image" %>
+    <% end %>
+
+    <div class="card shadow p-3 mb-5 bg-body rounded border rounded-5">
+      <div class="card-body">
+        <p class="card-text"><strong>Address:</strong> <%= @listing.address %></p>
+        <p class="card-text"><strong>Description:</strong> <%= @listing.description %></p>
+        <p class="card-text price"><strong>Price per hour:</strong> $<%= @listing.price_per_hour %></p>
+      </div>
+    </div>
+
+    <% if current_user && @listing.user_id == current_user.id %>
+      <%= link_to 'Edit Listing', edit_listing_path(@listing), class: 'btn btn-primary' %>
+      <%= button_to 'Delete Listing', listing_path(@listing), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    <% end %>
   </div>
-  <div class="listing-map border rounded-5 m-auto" style="width: 80%; height: 600px;"
-      data-controller="map"
-      data-map-markers-value="<%= @markers.to_json %>"
-      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+
+  <div class="listing-map-container">
+    <div class="listing-map border rounded-5"
+        data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+    </div>
   </div>
 </div>
+
+
 
 <% if current_user!= nil && @listing.user_id == current_user.id %>
   <%= link_to 'Edit Listing', edit_listing_path(@listing), class: 'btn btn-primary' %>

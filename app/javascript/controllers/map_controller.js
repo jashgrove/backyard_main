@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
+import mapboxgl from 'mapbox-gl';
 
-import mapboxgl from 'mapbox-gl'
 export default class extends Controller {
   static values = {
     apiKey: String,
@@ -13,14 +13,21 @@ export default class extends Controller {
 
     this.map = new mapboxgl.Map({
       container: this.element,
-      style: "mapbox://styles/mapbox/streets-v10"
+      style: "mapbox://styles/mapbox/streets-v10",
+      center: this.markersValue.length > 0 ? [this.markersValue[0].lng, this.markersValue[0].lat] : [-74.006, 40.7128],
+      zoom: 12
     })
 
-    this.#addMarkersToMap()
-    this.#fitMapToMarkers()
+    this.#addMarkersToMap();
+    this.#fitMapToMarkers();
 
     this.map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
       mapboxgl: mapboxgl }))
+
+    this.map.on("load", () => {
+      this.element.style.height = "400px"; // Ensures the height is set dynamically
+      this.map.resize();
+    });
   }
 
   #addMarkersToMap() {
